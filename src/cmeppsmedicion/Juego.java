@@ -27,11 +27,6 @@ public class Juego {
     }
 
     public void iniciarPartida() {
-        try {
-            Runtime.getRuntime().exec("cls");
-        } catch (IOException ex) {
-            Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
-        }
         System.out.println("--------------------------------------------------");
         System.out.println("Iniciando partida");
         boolean encontrado = false;
@@ -51,10 +46,10 @@ public class Juego {
             System.out.println("Jugador1 escriba palabra: ");
             palabraNueva = scan.nextLine();
             if (this._comprobarSolucion(palabraNueva)) {
-                jugador1.escribePalabra(palabra + "\tACIERTO");
+                jugador1.escribePalabra(palabraNueva + "\tACIERTO");
                 encontrado = true;
             } else {
-                jugador1.escribePalabra(palabra + "\tFALLO");
+                jugador1.escribePalabra(palabraNueva + "\tFALLO");
             }
             System.out.println("Jugador1");
             for (String string : jugador1.getHistorial()) {
@@ -62,21 +57,24 @@ public class Juego {
             }
             if (!encontrado) {
                 System.out.println("Jugador2 escriba palabra: ");
+                palabraNueva = new String();
                 palabraNueva = scan.nextLine();
+                scan.nextLine();
                 if (this._comprobarSolucion(palabraNueva)) {
-                    jugador2.escribePalabra(palabra + "\tACIERTO");
+                    jugador2.escribePalabra(palabraNueva + "\tACIERTO");
                     encontrado = true;
                 } else {
-                    jugador2.escribePalabra(palabra + "\tFALLO");
+                    jugador2.escribePalabra(palabraNueva + "\tFALLO");
                 }
-                System.out.println("Jugador1");
-                for (String string : jugador1.getHistorial()) {
+                System.out.println("Jugador2");
+                for (String string : jugador2.getHistorial()) {
                     System.out.println(string);
                 }
             }
 
         }
-
+        jugador1.reset();
+        jugador2.reset();
     }
 
     private String _desordenar() {
@@ -92,6 +90,6 @@ public class Juego {
     }
 
     private boolean _comprobarSolucion(String palabraNueva) {
-        return palabraNueva.toUpperCase() == this.palabra;
+        return palabraNueva.toUpperCase().equals(palabra);
     }
 }

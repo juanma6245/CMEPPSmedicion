@@ -28,4 +28,8 @@ public class Jugador {
     public void escribePalabra(String palabra) {
         this.historial.add(palabra);
     }
+    
+    public void reset() {
+        this.historial.clear();
+    }
 }
