@@ -14,7 +14,9 @@ public class CMEPPSmedicion {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        String[] palabras = {"HOLA","JUEGO","JUGADOR"};
+        String palabra = palabras[(int)Math.random()*3];
+        Juego juego = new Juego(new Jugador(), new Jugador(), palabra);
     }
     
 }
